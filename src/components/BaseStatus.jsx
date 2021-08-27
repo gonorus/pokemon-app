@@ -34,7 +34,7 @@ const Status = (props) => {
       <td>
         <input
           css={SliderStyle}
-          name={props.statusField}
+          id={props.statusField}
           type="range"
           min="1"
           max={props.statusField === BASE_STATUS_TYPE.HealthPoint ? 9999 : 100}
