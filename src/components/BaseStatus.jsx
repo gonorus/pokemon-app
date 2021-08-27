@@ -55,7 +55,7 @@ Status.propTypes = {
 
 const BaseStatus = (props) => {
   const BaseStatusContainerStyle = css({
-    width: '100vw',
+    maxWidth: '650px',
     display: 'flex',
     justifyContent: 'center',
     gap: '16px',
