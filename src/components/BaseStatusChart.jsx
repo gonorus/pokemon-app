@@ -54,10 +54,10 @@ BaseStatusChart.propTypes = {
 };
 BaseStatusChart.defaultProps = {
   hp: 1000,
-  attack: 20,
-  defense: 40,
-  specialAttack: 60,
-  specialDefense: 80,
-  speed: 100
+  attack: 10,
+  defense: 20,
+  specialAttack: 30,
+  specialDefense: 40,
+  speed: 50
 };
 export default BaseStatusChart;
