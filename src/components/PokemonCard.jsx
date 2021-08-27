@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 /* @jsx jsx */
 import { jsx, css } from '@emotion/react';
 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
 const PokemonCard = (props) => {
   const { pokemon, pocket } = props;
-  const { name, artwork } = pokemon;
+  const { name, dreamworld } = pokemon;
 
   const OnCardClick = () => {
     alert(name);
@@ -50,7 +52,12 @@ const PokemonCard = (props) => {
 
   return (
     <div css={CardStyle} onClick={OnCardClick}>
-      <img src={artwork} />
+      <LazyLoadImage
+        src={dreamworld}
+        alt='pokemon-image'
+        height='115px'
+        width='115px'
+      />
       <div className='info'>
         <p>{name}</p>
         <p>owned: {pocket[[name]].length}</p>
