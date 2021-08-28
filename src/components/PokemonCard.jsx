@@ -2,16 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 /* @jsx jsx */
 import { jsx, css } from '@emotion/react';
-
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { Link } from 'react-router-dom';
 
 const PokemonCard = (props) => {
   const { pokemon, pocket } = props;
   const { name, dreamworld } = pokemon;
-
-  const OnCardClick = () => {
-    alert(name);
-  }
 
   const CardStyle = css({
     width: '150px',
@@ -51,7 +47,7 @@ const PokemonCard = (props) => {
   });
 
   return (
-    <div css={CardStyle} onClick={OnCardClick}>
+    <Link to={`detail/${name}`} css={CardStyle}>
       <LazyLoadImage
         src={dreamworld}
         alt='pokemon-image'
@@ -62,7 +58,7 @@ const PokemonCard = (props) => {
         <p>{name}</p>
         <p>owned: {pocket[[name]].length}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 PokemonCard.propTypes = {

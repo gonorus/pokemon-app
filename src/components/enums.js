@@ -1,5 +1,5 @@
 const COMPONENT_HEIGHT = {
-  Menubar: '50px',
+  Menubar: '75px',
 }
 
 const BASE_STATUS_TYPE = {

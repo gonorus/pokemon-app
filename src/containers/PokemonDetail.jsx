@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 /* @jsx jsx */
 import { jsx, css } from '@emotion/react';
+import { useParams } from 'react-router-dom';
 
 import BaseInfo from '../components/BaseInfo';
 import BaseStatus from '../components/BaseStatus';
-
 import { COMPONENT_HEIGHT } from '../components/enums';
 
 const PokemonDetail = (props) => {
+  const { pokemonName } = useParams();
   const [pokemonData, setPokemonData] = useState({});
 
   useEffect(() => {
@@ -664,15 +665,9 @@ const PokemonDetail = (props) => {
 
   return (
     <div css={PokemonDetailStyle}>
-      <BaseInfo />
+      <BaseInfo name={pokemonName} />
       <BaseStatus />
     </div>
   );
-};
-PokemonDetail.propTypes = {
-  pokemonName: PropTypes.string.isRequired
-};
-PokemonDetail.defaultProps = {
-  pokemonName: 'charmander'
 };
 export default PokemonDetail;
