@@ -27,12 +27,13 @@ const MenuBar = () => {
     width: '150px',
     backgroundImage: `url(${PokemonLogoSVG})`,
     backgroundSize: 'cover',
-    backgroundPosition: 'center'
+    backgroundPosition: 'center',
+    color: 'transparent'
   });
   return (
     <div css={MenuStyle}>
       <nav>
-        <Link to='/' css={LogoStyle} />
+        <Link to='/' css={LogoStyle}>Home</Link>
       </nav>
     </div>
   );
