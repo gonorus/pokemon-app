@@ -8,7 +8,7 @@
   "scripts": {
     "start": "webpack serve --progress --color",
     "build": "webpack --node-env production --progress",
-    "build:Dev": "webpack --progress",
+    "build:Dev": "webpack --progress"
   },
   "dependencies": {
     "@emotion/react": "^11.4.1",
