@@ -4,13 +4,18 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import MenuBar from '../components/MenuBar';
 import PokemonList from './PokemonList';
 import PokemonDetail from './PokemonDetail';
-import { PokedexContext, PokedexHook } from '../context/pokedex';
+import { PokedexContext, UsePokedexHook } from '../context/pokedex';
 
 const App = () => {
+  const {
+    pokedex,
+    AddPokemonIntoPokedex
+  } = UsePokedexHook();
+
   return (
     <HashRouter>
       <MenuBar />
-      <PokedexContext.Provider value={PokedexHook}>
+      <PokedexContext.Provider value={{ pokedex, AddPokemonIntoPokedex }}>
         <Switch>
           <Route exact path='/'>
             <PokemonList />
