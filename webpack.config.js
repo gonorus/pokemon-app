@@ -16,6 +16,7 @@ module.exports = (env, options) => {
         static: path.resolve(__dirname, 'dist'),
         port: 9000,
         hot: true,
+        historyApiFallback: true,
       },
       entry: {
         index: path.resolve(__dirname, 'src', 'index.js')

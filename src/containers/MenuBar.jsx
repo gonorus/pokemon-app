@@ -1,8 +1,8 @@
 import React from 'react';
 /* @jsx jsx */
 import { jsx, css } from '@emotion/react';
+import { Link } from 'react-router-dom';
 
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import PokemonLogoSVG from '../images/pokemon_logo.svg';
 import { COMPONENT_HEIGHT } from '../components/enums';
 
@@ -19,19 +19,20 @@ const MenuBar = () => {
       flexDirection: 'row',
       flexGrow: 1,
       justifyContent: 'space-between',
-      height: COMPONENT_HEIGHT.Menubar,
+      height: COMPONENT_HEIGHT.Menubar
     }
+  });
+
+  const LogoStyle = css({
+    width: '150px',
+    backgroundImage: `url(${PokemonLogoSVG})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
   });
   return (
     <div css={MenuStyle}>
       <nav>
-        <p>asd</p>
-        <LazyLoadImage
-          src={PokemonLogoSVG}
-          height='50px'
-          width='75px'
-        />
-        <p>asd</p>
+        <Link to='/' css={LogoStyle} />
       </nav>
     </div>
   );
