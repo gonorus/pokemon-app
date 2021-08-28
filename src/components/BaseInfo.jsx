@@ -5,6 +5,7 @@ import { jsx, css } from '@emotion/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { PyhsicalInfo } from './PyhsicalInfo';
 import { PokemonTypeInfo } from './PokemonTypeInfo';
+import CatchButton from './CatchButton';
 
 const BaseInfo = (props) => {
   const { name, height, weight, types } = props;
@@ -61,6 +62,7 @@ const BaseInfo = (props) => {
       <div className='info'>
         <h2>{name}</h2>
         <PyhsicalInfo height={height} weight={weight} />
+        <CatchButton pokemonName={name} />
         <div css={PokemonTypesStyle}>
           {
             types.map((type, index) => <PokemonTypeInfo key={index} type={type} />)
