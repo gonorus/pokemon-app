@@ -2,9 +2,16 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
+let mode = 'development';
+if (process.env.NODE_ENV == 'production') {
+  mode = 'production';
+}
+
 module.exports = (env, options) => {
-  return(
+  return (
     {
+      mode: mode,
+      devtool: mode === 'production' ? false : 'source-map',
       devServer: {
         static: path.resolve(__dirname, 'dist'),
         port: 9000,
@@ -16,6 +23,7 @@ module.exports = (env, options) => {
       output: {
         filename: '[name].[contenthash].js',
         chunkFilename: '[name].[contenthash].js',
+        path: path.resolve(__dirname, 'dist'),
         clean: true,
       },
       optimization: {

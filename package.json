@@ -6,8 +6,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "webpack serve --mode=development --progress --color",
-    "build": "webpack --mode=production --progress"
+    "start": "webpack serve --progress --color",
+    "build": "webpack --node-env production --progress",
+    "build:Dev": "webpack --progress",
   },
   "dependencies": {
     "@emotion/react": "^11.4.1",
