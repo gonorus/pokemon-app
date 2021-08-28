@@ -7,6 +7,8 @@ import { PyhsicalInfo } from './PyhsicalInfo';
 import { PokemonTypeInfo } from './PokemonTypeInfo';
 
 const BaseInfo = (props) => {
+  const { name, height, weight, types } = props;
+
   const BaseInfoStyle = css({
     maxWidth: '650px',
     display: 'flex',
@@ -57,11 +59,11 @@ const BaseInfo = (props) => {
         width='150px'
       />
       <div className='info'>
-        <h2>{props.name}</h2>
-        <PyhsicalInfo height={props.height} weight={props.weight} />
+        <h2>{name}</h2>
+        <PyhsicalInfo height={height} weight={weight} />
         <div css={PokemonTypesStyle}>
           {
-            props.types.map((type, index) => <PokemonTypeInfo key={index} type={type} />)
+            types.map((type, index) => <PokemonTypeInfo key={index} type={type} />)
           }
         </div>
       </div>
