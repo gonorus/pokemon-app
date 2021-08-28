@@ -24,6 +24,7 @@ module.exports = (env, options) => {
         filename: '[name].[contenthash].js',
         chunkFilename: '[name].[contenthash].js',
         path: path.resolve(__dirname, 'dist'),
+        assetModuleFilename: 'images/[hash][ext][query]',
         clean: true,
       },
       optimization: {
@@ -51,8 +52,8 @@ module.exports = (env, options) => {
             use: ['style-loader', 'css-loader']
           },
           {
-            test: /\.svg$/,
-            use: ['@svgr/webpack'],
+            test: /\.(png|gif|jpe?g|svg)$/,
+            type: 'asset/resource'
           }
         ]
       },
