@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 
 import PokemonLogoSVG from '../images/pokemon_logo.svg';
-import { COMPONENT_HEIGHT } from '../components/enums';
+import { COMPONENT_HEIGHT } from './enums';
 
 const MenuBar = () => {
   const MenuStyle = css({
