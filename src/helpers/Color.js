@@ -2,8 +2,9 @@
  * @param {String} hex 
  * @returns {Number}
  */
-export function HighContrastValue(hex) {
-  return (
+export function HighContrastValue (hex) {
+  if (hex) {
+    return (
       (
         (
           (
@@ -14,4 +15,5 @@ export function HighContrastValue(hex) {
         ) - 128
       ) * -1000
     )
+  }
 }
