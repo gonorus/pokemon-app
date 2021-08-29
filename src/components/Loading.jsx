@@ -42,7 +42,7 @@ const Loading = () => {
       position: 'absolute',
       top: 'calc(50% - 15px)',
       left: 'calc(50% - 15px)',
-      zIndex: 10,
+      zIndex: 9999,
       backgroundColor: '#FFFFFF',
       borderWidth: '5px',
       borderStyle: 'solid',
