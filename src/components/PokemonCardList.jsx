@@ -34,6 +34,7 @@ const PokemonCardList = (props) => {
 PokemonCardList.propTypes = {
   pokemonList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
+    pokemonName: PropTypes.string,
     name: PropTypes.string,
     image: PropTypes.string
   })).isRequired,

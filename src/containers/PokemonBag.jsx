@@ -14,6 +14,7 @@ const PokemonBag = () => {
           return pokemon.owned.map(
             owned => ({
               id: null,
+              pokemonName: key,
               name: owned.name,
               image: pokemon.image,
               catchedDate: owned.catchedDate,
@@ -24,7 +25,6 @@ const PokemonBag = () => {
     }
     return [];
   })
-  console.log({pokedex, ownedPokemon})
   return (<PokemonCardList pokemonList={ownedPokemon} />);
 };
 export default PokemonBag;

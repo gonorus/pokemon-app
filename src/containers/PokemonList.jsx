@@ -16,7 +16,18 @@ const PokemonList = () => {
     PokemonDataAPI().then(
       response => {
         const { count, nextOffset, results } = response.data.pokemons;
-        const updatedData = [...pokemonList, ...results];
+        const updatedData = [
+          ...pokemonList,
+          ...results.map(
+            (pokemon) => {
+              return ({
+                id: pokemon.id,
+                pokemonName: pokemon.name,
+                name: pokemon.name,
+                image: pokemon.image
+              });
+            })
+        ];
         setOffset(nextOffset);
         setPokemonList(updatedData);
         setHasMore(updatedData.length < count);
