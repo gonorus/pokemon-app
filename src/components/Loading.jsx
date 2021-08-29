@@ -19,7 +19,8 @@ const Loading = () => {
 
     '&::before, &::after': {
       content: '""',
-      position: 'absolute'
+      position: 'absolute',
+      overflow: 'hidden',
     },
 
     '&::before': {
