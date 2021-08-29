@@ -11,8 +11,6 @@ export const LOAD_POKEMON_LIST = GraphqlClient.watchQuery({
           id
           name
           image
-          artwork
-          dreamworld
         }
       }
     }

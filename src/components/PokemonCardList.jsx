@@ -33,10 +33,9 @@ const PokemonCardList = (props) => {
 };
 PokemonCardList.propTypes = {
   pokemonList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
     name: PropTypes.string,
-    image: PropTypes.string,
-    artwork: PropTypes.string,
-    dreamworld: PropTypes.string
+    image: PropTypes.string
   })).isRequired,
   hasMore: PropTypes.bool,
   hasMoreFetch: PropTypes.func
@@ -44,10 +43,9 @@ PokemonCardList.propTypes = {
 PokemonCardList.defaultProps = {
   pokemonList: [
     {
+      id: 1,
       name: 'pokemon-name',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
-      artwork: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
-      dreamworld: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg'
+      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png'
     }
   ],
   hasMore: false,
