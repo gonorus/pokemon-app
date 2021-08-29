@@ -7,7 +7,7 @@ import BaseInfo from '../components/BaseInfo';
 import BaseStatus from '../components/BaseStatus';
 import { COMPONENT_HEIGHT } from '../components/enums';
 import { useQuery } from '@apollo/client';
-import { LOAD_POKEMON_DATA } from '../graphql/queries';
+import { LOAD_POKEMON_DATA } from '../graphql/Queries';
 import { LoadingLoader } from '../components/LoadingLoader';
 import BaseMovement from '../components/BaseMovement';
 

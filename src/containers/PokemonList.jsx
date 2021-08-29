@@ -4,7 +4,7 @@ import PokemonCard from '../components/PokemonCard';
 
 import { COMPONENT_HEIGHT } from '../components/enums';
 import { LoadingLoader } from '../components/LoadingLoader';
-import { LOAD_POKEMON_LIST } from '../graphql/queries';
+import { LOAD_POKEMON_LIST } from '../graphql/Queries';
 
 const PokemonList = () => {
   const [offset, setOffset] = useState(0);
