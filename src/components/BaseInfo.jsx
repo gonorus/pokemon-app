@@ -8,7 +8,7 @@ import { PokemonTypeInfo } from './PokemonTypeInfo';
 import CatchButton from './CatchButton';
 
 const BaseInfo = (props) => {
-  const { name, height, weight, types } = props;
+  const { name, height, weight, types, image } = props;
 
   const BaseInfoStyle = css({
     maxWidth: '650px',
@@ -51,10 +51,11 @@ const BaseInfo = (props) => {
     gap: '8px',
     justifyContent: 'center'
   });
+
   return (
     <div css={BaseInfoStyle}>
       <LazyLoadImage
-        src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png'
+        src={image}
         alt='pokemon-image'
         height='150px'
         width='150px'
@@ -65,7 +66,7 @@ const BaseInfo = (props) => {
         <CatchButton pokemonName={name} />
         <div css={PokemonTypesStyle}>
           {
-            types.map((type, index) => <PokemonTypeInfo key={index} type={type} />)
+            types.map((elementType, index) => <PokemonTypeInfo key={index} type={elementType.type} />)
           }
         </div>
       </div>
@@ -73,15 +74,26 @@ const BaseInfo = (props) => {
   );
 }
 BaseInfo.propTypes = {
-  name: PropTypes.string,
-  height: PropTypes.number,
-  weight: PropTypes.number,
-  types: PropTypes.arrayOf(PropTypes.string)
+  name: PropTypes.string.isRequired,
+  height: PropTypes.number.isRequired,
+  weight: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  types: PropTypes.arrayOf(PropTypes.shape({
+    type: PropTypes.shape({
+      id: PropTypes.any,
+      name: PropTypes.string
+    })
+  })).isRequired
 };
 BaseInfo.defaultProps = {
   name: 'charmander (fake)',
   height: 6,
   weight: 85,
-  types: ['Normal', 'Fire', 'Water', 'Electric', 'Grass', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy']
+  types: [
+    {
+      id: null,
+      name: 'bug'
+    }
+  ]
 };
 export default BaseInfo;
