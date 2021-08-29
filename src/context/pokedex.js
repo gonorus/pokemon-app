@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import { GetCurrentTime } from "../helpers/DateTime";
 
 export const PokedexContext = createContext(null);
 
@@ -28,7 +29,7 @@ export const UsePokedexHook = () => {
    */
   const _getPokemonNickName = (pokemonName) => {
     let _nickName = '';
-    const ownedPokemon = pokedex ? pokedex[pokemonName] : [];
+    const ownedPokemon = pokedex && pokedex[pokemonName] ? pokedex[pokemonName].owned : [];
     let shouldValidateNickname = true;
 
     while (shouldValidateNickname) {
@@ -48,12 +49,13 @@ export const UsePokedexHook = () => {
 
   /**
    * @param {String} pokemonName 
+   * @param {String} image 
    */
-  const AddPokemonIntoPokedex = (pokemonName) => {
+  const AddPokemonIntoPokedex = (pokemonName, image) => {
     if (_isPokemonCatched()) {
       const _nickName = _getPokemonNickName(pokemonName);
       if (_nickName) {
-        PersistNewPokemon(pokemonName, _nickName);
+        PersistNewPokemon(pokemonName, image, _nickName);
       }
       else
         alert(`${pokemonName} was run away`);
@@ -62,34 +64,44 @@ export const UsePokedexHook = () => {
 
   /**
    * @param {String} pokemonName 
+   * @param {String} image 
    * @param {String} nickName
    */
-  const PersistNewPokemon = (pokemonName, nickName) => {
+  const PersistNewPokemon = (pokemonName, image, nickName) => {
     if (pokedex) {
       const ownedPokemon = pokedex[pokemonName];
       if (ownedPokemon) {
         setPokedex({
           ...pokedex,
-          [[pokemonName]]: [
-            ...ownedPokemon,
-            { name: nickName }
-          ]
+          [[pokemonName]]: {
+            image: image,
+            owned: [
+              ...ownedPokemon.owned,
+              { name: nickName, catchedDate: GetCurrentTime() }
+            ]
+          }
         });
       }
       else {
         setPokedex({
           ...pokedex,
-          [[pokemonName]]: [
-            { name: nickName }
-          ]
+          [[pokemonName]]: {
+            image: image,
+            owned: [
+              { name: nickName, catchedDate: GetCurrentTime() }
+            ]
+          }
         });
       }
     }
     else {
       setPokedex({
-        [[pokemonName]]: [
-          { name: nickName }
-        ]
+        [[pokemonName]]: {
+          image: image,
+          owned: [
+            { name: nickName, catchedDate: GetCurrentTime() }
+          ]
+        }
       });
     }
   }

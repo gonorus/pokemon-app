@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import { PokedexContext } from '../context/pokedex';
 
 const CatchButton = (props) => {
-  const { pokemonName } = props;
+  const { pokemonName, image } = props;
   const { AddPokemonIntoPokedex } = useContext(PokedexContext);
 
   const CatchButtonStyle = css({
@@ -24,12 +24,13 @@ const CatchButton = (props) => {
   });
 
   return (
-    <div css={CatchButtonStyle} onClick={() => AddPokemonIntoPokedex(pokemonName)}>
+    <div css={CatchButtonStyle} onClick={() => AddPokemonIntoPokedex(pokemonName, image)}>
       <p>Catch<br />this<br />Pokemon</p>
     </div>
   );
 };
 CatchButton.propTypes = {
-  pokemonName: PropTypes.string.isRequired
+  pokemonName: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired
 };
 export default CatchButton;

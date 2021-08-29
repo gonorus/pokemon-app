@@ -7,7 +7,7 @@ import { PokedexContext } from '../context/pokedex';
 
 const PokemonCard = (props) => {
   const { pokemon } = props;
-  const { id, name, image } = pokemon;
+  const { id, name, image, catchedDate } = pokemon;
   const { pokedex } = useContext(PokedexContext);
 
   const CardStyle = css({
@@ -46,7 +46,6 @@ const PokemonCard = (props) => {
       color: '#6A6A6A',
       fontSize: '11pt',
       fontWeight: 'lighter',
-      textTransform: 'uppercase',
       textAlign: 'center'
     }
   });
@@ -55,8 +54,18 @@ const PokemonCard = (props) => {
     <Link to={`detail/${name}`} css={CardStyle}>
       <div css={CardImageStyle} />
       <div css={InfoStyle}>
-        <p>#{id} - {name}</p>
-        <p>owned: {pokedex && pokedex[[name]] ? pokedex[[name]].length : 0}</p>
+        {
+          id ?
+            <>
+              <p>#{id} - {name}</p>
+              <p>owned: {pokedex && pokedex[[name]] ? pokedex[[name]].owned.length : 0}</p>
+            </>
+            :
+            <>
+              <p>{name}</p>
+              <p>Catched: {catchedDate}</p>
+            </>
+        }
       </div>
     </Link>
   );
@@ -64,8 +73,9 @@ const PokemonCard = (props) => {
 PokemonCard.propTypes = {
   pokemon: PropTypes.shape({
     id: PropTypes.number,
-    name: PropTypes.string,
-    image: PropTypes.string
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    catchedDate: PropTypes.string
   })
 };
 PokemonCard.defaultProps = {
