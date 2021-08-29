@@ -72,7 +72,7 @@ module.exports = (env, options) => {
             use: ['style-loader', 'css-loader']
           },
           {
-            test: /\.(png|gif|jpe?g|svg)$/,
+            test: /\.(png|gif|jpe?g|svg|ico)$/,
             type: 'asset/resource'
           }
         ]
@@ -80,7 +80,8 @@ module.exports = (env, options) => {
       plugins: [
         new HtmlWebpackPlugin({
           title: mode === 'development' ? 'Development' : 'Production',
-          template: path.resolve(__dirname, 'src', 'template.html')
+          template: path.resolve(__dirname, 'src', 'template.html'),
+          favicon: path.resolve(__dirname, 'src', 'images', 'favicon.ico')
         }),
         // new WebpackBundleAnalyzer()
       ],
