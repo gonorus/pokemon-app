@@ -28,8 +28,6 @@ const PokemonDetail = () => {
     overflow: 'auto'
   });
 
-  if (data) console.log(data.pokemon);
-
   return (
     <div css={PokemonDetailStyle}>
       {data === undefined ? <LoadingLoader /> : <></>}
