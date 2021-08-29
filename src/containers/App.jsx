@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/client';
 import MenuBar from '../components/MenuBar';
 import PokemonList from './PokemonList';
 import PokemonDetail from './PokemonDetail';
+import PokemonBag from './PokemonBag';
 import { PokedexContext, UsePokedexHook } from '../context/pokedex';
 import GraphqlClient from '../graphql/Configuration';
 
@@ -25,6 +26,9 @@ const App = () => {
             </Route>
             <Route path='/detail/:pokemonName'>
               <PokemonDetail />
+            </Route>
+            <Route path='/bag'>
+              <PokemonBag />
             </Route>
           </Switch>
         </PokedexContext.Provider>
