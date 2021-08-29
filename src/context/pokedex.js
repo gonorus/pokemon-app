@@ -38,7 +38,7 @@ export const UsePokedexHook = () => {
         break;
       else if (
         _nickName.length === 0 ||
-        (pokedex && ownedPokemon.some(pokemon => pokemon.name === _nickName))
+        (ownedPokemon && ownedPokemon.some(pokemon => pokemon.name === _nickName))
       )
         alert('give another nickname');
       else shouldValidateNickname = false;
