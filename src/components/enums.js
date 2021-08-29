@@ -2,6 +2,11 @@ const COMPONENT_HEIGHT = {
   Menubar: '75px',
 }
 
+const COMPONENT_MAX_WIDTH = {
+  Menubar: '1024px',
+  Content: '650px',
+}
+
 const BASE_STATUS_TYPE = {
   HealthPoint: 'Health Point',
   AttackPoint: 'Attack',
@@ -34,6 +39,7 @@ const POKEMON_TYPE_COLOR = {
 
 export {
   COMPONENT_HEIGHT,
+  COMPONENT_MAX_WIDTH,
   BASE_STATUS_TYPE,
   POKEMON_TYPE_COLOR
 };

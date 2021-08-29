@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 import { jsx, css } from '@emotion/react';
 
 import BaseStatusChart from './BaseStatusChart';
-import { BASE_STATUS_TYPE } from './enums';
+import { BASE_STATUS_TYPE, COMPONENT_MAX_WIDTH } from './enums';
 import { StatusSlider } from './StatusSlider';
 
 const BaseStatus = (props) => {
   const BaseStatusContainerStyle = css({
-    maxWidth: '650px',
+    maxWidth: COMPONENT_MAX_WIDTH.Content,
     display: 'flex',
     justifyContent: 'center',
     gap: '16px',

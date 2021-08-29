@@ -6,12 +6,13 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { PyhsicalInfo } from './PyhsicalInfo';
 import { PokemonTypeInfo } from './PokemonTypeInfo';
 import CatchButton from './CatchButton';
+import { COMPONENT_MAX_WIDTH } from './enums';
 
 const BaseInfo = (props) => {
   const { name, height, weight, types, image } = props;
 
   const BaseInfoStyle = css({
-    maxWidth: '650px',
+    maxWidth: COMPONENT_MAX_WIDTH.Content,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

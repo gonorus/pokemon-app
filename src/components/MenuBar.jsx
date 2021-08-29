@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import { Link } from 'react-router-dom';
 
 import PokemonLogoSVG from '../images/pokemon_logo.svg';
-import { COMPONENT_HEIGHT } from './enums';
+import { COMPONENT_HEIGHT, COMPONENT_MAX_WIDTH } from './enums';
 
 const MenuBar = () => {
   const MenuStyle = css({
@@ -14,7 +14,7 @@ const MenuBar = () => {
     backgroundColor: '#3B4CCA',
 
     'nav': {
-      maxWidth: '1024px',
+      maxWidth: COMPONENT_MAX_WIDTH.Menubar,
       display: 'flex',
       flexDirection: 'row',
       flexGrow: 1,
