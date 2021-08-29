@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 /* @jsx jsx */
 import { jsx, css } from '@emotion/react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
+import { PokedexContext } from '../context/pokedex';
 
 const PokemonCard = (props) => {
   const { pokemon } = props;
   const { name, dreamworld } = pokemon;
+  const { pokedex } = useContext(PokedexContext);
 
   const CardStyle = css({
     width: '150px',
@@ -56,7 +58,7 @@ const PokemonCard = (props) => {
       />
       <div className='info'>
         <p>{name}</p>
-        <p>owned: 0</p>
+        <p>owned: {pokedex && pokedex[[name]] ? pokedex[[name]].length : 0}</p>
       </div>
     </Link>
   );
