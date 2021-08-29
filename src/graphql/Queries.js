@@ -22,17 +22,10 @@ export const LOAD_POKEMON_DATA = gql`
   query pokemon($name: String!){
     pokemon(name:$name) {
       name
-      base_experience
       height
       weight
       moves {
         move {
-          name
-          url
-        }
-      }
-      abilities {
-        ability {
           name
           url
         }
