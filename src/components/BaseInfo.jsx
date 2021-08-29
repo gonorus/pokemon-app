@@ -64,7 +64,7 @@ const BaseInfo = (props) => {
       <div className='info'>
         <h2>{name}</h2>
         <PyhsicalInfo height={height} weight={weight} />
-        <CatchButton pokemonName={name} />
+        <CatchButton pokemonName={name} image={image} />
         <div css={PokemonTypesStyle}>
           {
             types.map((elementType, index) => <PokemonTypeInfo key={index} type={elementType.type} />)

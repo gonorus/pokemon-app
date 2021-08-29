@@ -1,9 +1,19 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { GetCurrentTime } from "../helpers/DateTime";
 
-export const PokedexContext = createContext({});
+export const PokedexContext = createContext(null);
 
 export const UsePokedexHook = () => {
-  const [pokedex, setPokedex] = useState({});
+  const [pokedex, setPokedex] = useState(null);
+
+  useEffect(() => {
+    if (!pokedex) {
+      const localStore = localStorage.getItem('pokedex');
+      if (localStore) setPokedex(JSON.parse(localStore)); // sync local pokedex with current context
+      else localStorage.setItem('pokedex', JSON.stringify({})); // initialize local pokedex
+    }
+    else localStorage.setItem('pokedex', JSON.stringify(pokedex)); // update local pokedex
+  }, [pokedex]);
 
   /**
    * @param {Number} percentage 
@@ -12,35 +22,87 @@ export const UsePokedexHook = () => {
   const _isPokemonCatched = (percentage = 0.5) => {
     return Math.random() < percentage;
   }
-  
+
   /**
-   * @returns
+   * @param {String} pokemonName 
+   * @returns 
    */
-  const _getPokemonNickName = () => {
+  const _getPokemonNickName = (pokemonName) => {
     let _nickName = '';
-    while (_nickName.length === 0) {
+    const ownedPokemon = pokedex && pokedex[pokemonName] ? pokedex[pokemonName].owned : [];
+    let shouldValidateNickname = true;
+
+    while (shouldValidateNickname) {
       _nickName = prompt('Give a nickname', '');
 
       if (_nickName === null)
         break;
-      else if (_nickName.length === 0)
+      else if (
+        _nickName.length === 0 ||
+        (ownedPokemon && ownedPokemon.some(pokemon => pokemon.name === _nickName))
+      )
         alert('give another nickname');
+      else shouldValidateNickname = false;
     }
     return _nickName;
   }
 
   /**
    * @param {String} pokemonName 
+   * @param {String} image 
    */
-  const AddPokemonIntoPokedex = (pokemonName) => {
+  const AddPokemonIntoPokedex = (pokemonName, image) => {
     if (_isPokemonCatched()) {
-      const _nickName = _getPokemonNickName();
+      const _nickName = _getPokemonNickName(pokemonName);
       if (_nickName) {
-        console.log('Adding new pokemon', { pokemonName, _nickName });
-        setPokedex({});
+        PersistNewPokemon(pokemonName, image, _nickName);
       }
       else
         alert(`${pokemonName} was run away`);
+    }
+  }
+
+  /**
+   * @param {String} pokemonName 
+   * @param {String} image 
+   * @param {String} nickName
+   */
+  const PersistNewPokemon = (pokemonName, image, nickName) => {
+    if (pokedex) {
+      const ownedPokemon = pokedex[pokemonName];
+      if (ownedPokemon) {
+        setPokedex({
+          ...pokedex,
+          [[pokemonName]]: {
+            image: image,
+            owned: [
+              ...ownedPokemon.owned,
+              { name: nickName, catchedDate: GetCurrentTime() }
+            ]
+          }
+        });
+      }
+      else {
+        setPokedex({
+          ...pokedex,
+          [[pokemonName]]: {
+            image: image,
+            owned: [
+              { name: nickName, catchedDate: GetCurrentTime() }
+            ]
+          }
+        });
+      }
+    }
+    else {
+      setPokedex({
+        [[pokemonName]]: {
+          image: image,
+          owned: [
+            { name: nickName, catchedDate: GetCurrentTime() }
+          ]
+        }
+      });
     }
   }
 
