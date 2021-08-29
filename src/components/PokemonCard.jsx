@@ -7,7 +7,7 @@ import { PokedexContext } from '../context/pokedex';
 
 const PokemonCard = (props) => {
   const { pokemon } = props;
-  const { id, name, image, catchedDate } = pokemon;
+  const { id, pokemonName, name, image, catchedDate } = pokemon;
   const { pokedex } = useContext(PokedexContext);
 
   const CardStyle = css({
@@ -51,7 +51,7 @@ const PokemonCard = (props) => {
   });
 
   return (
-    <Link to={`detail/${name}`} css={CardStyle}>
+    <Link to={`detail/${pokemonName}`} css={CardStyle}>
       <div css={CardImageStyle} />
       <div css={InfoStyle}>
         {
@@ -73,6 +73,7 @@ const PokemonCard = (props) => {
 PokemonCard.propTypes = {
   pokemon: PropTypes.shape({
     id: PropTypes.number,
+    pokemonName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     catchedDate: PropTypes.string

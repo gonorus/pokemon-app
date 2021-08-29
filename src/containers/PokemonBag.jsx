@@ -1,6 +1,4 @@
 import React, { useContext, useMemo } from 'react';
-/* @jsx jsx */
-import { jsx, css } from '@emotion/react';
 import PokemonCardList from '../components/PokemonCardList';
 import { PokedexContext } from '../context/pokedex';
 
@@ -14,6 +12,7 @@ const PokemonBag = () => {
           return pokemon.owned.map(
             owned => ({
               id: null,
+              pokemonName: key,
               name: owned.name,
               image: pokemon.image,
               catchedDate: owned.catchedDate,
@@ -24,7 +23,6 @@ const PokemonBag = () => {
     }
     return [];
   })
-  console.log({pokedex, ownedPokemon})
   return (<PokemonCardList pokemonList={ownedPokemon} />);
 };
 export default PokemonBag;

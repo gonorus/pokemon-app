@@ -1,25 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+/* @jsx jsx */
+import { jsx, css } from '@emotion/react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import PokemonCard from './PokemonCard';
 import { LoadingLoader } from './LoadingLoader';
-import { COMPONENT_HEIGHT } from './enums';
+import { COMPONENT_HEIGHT, COMPONENT_MAX_WIDTH } from './enums';
 
 const PokemonCardList = (props) => {
   const { pokemonList, hasMore, hasMoreFetch } = props;
 
+  const InfineScrollStyle = css({
+    height: `calc(100vh - ${COMPONENT_HEIGHT.Menubar})`,
+    maxWidth: COMPONENT_MAX_WIDTH.Menubar,
+    padding: '16px 0',
+    boxSizing: 'border-box',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: '8px',
+
+    '@media (min-width: 600px)': {
+      margin: '0 auto',
+    }
+  });
+
   return (
     <InfiniteScroll
+      css={InfineScrollStyle}
       height={`calc(100vh - ${COMPONENT_HEIGHT.Menubar})`}
-      style={{
-        height: `calc(100vh - ${COMPONENT_HEIGHT.Menubar})`,
-        padding: '16px 0',
-        boxSizing: 'border-box',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: '8px'
-      }}
       dataLength={pokemonList.length}
       next={hasMoreFetch}
       hasMore={hasMore}
@@ -34,6 +43,7 @@ const PokemonCardList = (props) => {
 PokemonCardList.propTypes = {
   pokemonList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
+    pokemonName: PropTypes.string,
     name: PropTypes.string,
     image: PropTypes.string
   })).isRequired,
