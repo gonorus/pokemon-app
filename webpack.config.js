@@ -79,7 +79,7 @@ module.exports = (env, options) => {
       },
       plugins: [
         new HtmlWebpackPlugin({
-          title: mode === 'development' ? 'Development' : 'Production',
+          title: mode === 'development' ? 'Development Pokedex' : 'Pokedex',
           template: path.resolve(__dirname, 'src', 'template.html'),
           favicon: path.resolve(__dirname, 'src', 'images', 'favicon.ico')
         }),
