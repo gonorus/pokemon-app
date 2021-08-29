@@ -30,14 +30,33 @@ module.exports = (env, options) => {
       },
       optimization: {
         splitChunks: {
+          chunks: 'all',
+          maxInitialRequests: Infinity,
+          minSize: 0,
           cacheGroups: {
+            index: {
+              name: 'index',
+              test: /[\\/]src[\\/]/,
+            },
+            react_vendor: {
+              name: 'react_vendor',
+              test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom)[\\/]/,
+            },
+            graphql_vendor: {
+              name: 'graphql_vendor',
+              test: /[\\/]node_modules[\\/]graphql[\\/]/,
+            },
+            components_vendor: {
+              name: 'components_vendor',
+              test: /[\\/]node_modules[\\/](react-svg-radar-chart|react-lazy-load-image-component|react-infinite-scroll-component)[\\/]/,
+            },
             vendors: {
-              test: /node_modules/,
-              name: "vendor",
-              chunks: "all",
+              name: 'vendors',
+              test: /[\\/]node_modules[\\/]/,
             }
           }
-        }
+        },
+        runtimeChunk: true
       },
       resolve: {
         extensions: ['.js', '.jsx'],
@@ -60,7 +79,7 @@ module.exports = (env, options) => {
       },
       plugins: [
         new HtmlWebpackPlugin({
-          title: options.mode === 'development' ? 'Development' : 'Production',
+          title: mode === 'development' ? 'Development' : 'Production',
           template: path.resolve(__dirname, 'src', 'template.html')
         }),
         // new WebpackBundleAnalyzer()
