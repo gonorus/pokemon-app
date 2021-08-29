@@ -9,6 +9,9 @@ import { COMPONENT_HEIGHT, COMPONENT_MAX_WIDTH } from './enums';
 
 const MenuBar = () => {
   const MenuStyle = css({
+    position: 'sticky',
+    top: 0,
+    zIndex: 9999,
     display: 'flex',
     justifyContent: 'center',
     backgroundColor: '#3B4CCA',

@@ -5,13 +5,12 @@ import { jsx, css } from '@emotion/react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import PokemonCard from './PokemonCard';
 import { LoadingLoader } from './LoadingLoader';
-import { COMPONENT_HEIGHT, COMPONENT_MAX_WIDTH } from './enums';
+import { COMPONENT_MAX_WIDTH } from './enums';
 
 const PokemonCardList = (props) => {
   const { pokemonList, hasMore, hasMoreFetch } = props;
 
   const InfineScrollStyle = css({
-    height: `calc(100vh - ${COMPONENT_HEIGHT.Menubar})`,
     maxWidth: COMPONENT_MAX_WIDTH.Menubar,
     padding: '16px 0',
     boxSizing: 'border-box',
@@ -28,7 +27,6 @@ const PokemonCardList = (props) => {
   return (
     <InfiniteScroll
       css={InfineScrollStyle}
-      height={`calc(100vh - ${COMPONENT_HEIGHT.Menubar})`}
       dataLength={pokemonList.length}
       next={hasMoreFetch}
       hasMore={hasMore}

@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 
 import BaseInfo from '../components/BaseInfo';
 import BaseStatus from '../components/BaseStatus';
-import { COMPONENT_HEIGHT } from '../components/enums';
 import { useQuery } from '@apollo/client';
 import { LOAD_POKEMON_DATA } from '../graphql/Queries';
 import { LoadingLoader } from '../components/LoadingLoader';
@@ -18,7 +17,7 @@ const PokemonDetail = () => {
   });
 
   const PokemonDetailStyle = css({
-    height: `calc(100vh - ${COMPONENT_HEIGHT.Menubar})`,
+    height: '100%',
     padding: '16px 0',
     boxSizing: 'border-box',
     display: 'flex',
@@ -38,7 +37,6 @@ const PokemonDetail = () => {
         types={data === undefined ? [] : [...new Set(data.pokemon.types)]}
         image={data === undefined ? '' : data.pokemon.sprites.front_default}
       />
-      <BaseMovement moves={data === undefined ? [] : [...new Set(data.pokemon.moves)]} />
       <BaseStatus
         hp={data === undefined ? 0 : data.pokemon.stats[0].base_stat}
         attack={data === undefined ? 0 : data.pokemon.stats[1].base_stat}
@@ -47,6 +45,7 @@ const PokemonDetail = () => {
         specialDefense={data === undefined ? 0 : data.pokemon.stats[4].base_stat}
         speed={data === undefined ? 0 : data.pokemon.stats[5].base_stat}
       />
+      <BaseMovement moves={data === undefined ? [] : [...new Set(data.pokemon.moves)]} />
     </div>
   );
 };
