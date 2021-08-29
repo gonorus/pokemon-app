@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
-
+import React, { useCallback, useEffect, useState } from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import PokemonCard from '../components/PokemonCard';
 
 import { COMPONENT_HEIGHT } from '../components/enums';
 import { LoadingLoader } from '../components/LoadingLoader';
+import { LOAD_POKEMON_LIST } from '../graphql/queries';
 
 const PokemonList = () => {
-  const [items, setItems] = useState(Array.from({ length: 100 }));
+  const [offset, setOffset] = useState(0);
+  const [pokemonList, setPokemonList] = useState([]);
   const [hasMore, setHasMore] = useState(true);
 
-  const fetchMoreData = () => {
-    if (items.length >= 500) {
-      setHasMore(false);
-      return;
-    }
-    // a fake async api call like which sends
-    // 20 more records in .5 secs
-    setTimeout(() => {
-      setItems(items.concat(Array.from({ length: 20 })));
-    }, 500);
-  };
+  const PokemonDataAPI = useCallback(() => LOAD_POKEMON_LIST.fetchMore({
+    variables: { offset: offset },
+    updateQuery: (previousResult, { fetchMoreResult }) => fetchMoreResult
+  }), [offset]);
+
+  const FetchPokemonData = useCallback(() => {
+    PokemonDataAPI().then(
+      response => {
+        const { count, nextOffset, results } = response.data.pokemons;
+        const updatedData = [...pokemonList, ...results];
+        setOffset(nextOffset);
+        setPokemonList(updatedData);
+        setHasMore(updatedData.length < count);
+      }
+    )
+  }, [pokemonList]);
+
+  useEffect(() => {
+    FetchPokemonData();
+  }, []);
 
   return (
     <InfiniteScroll
@@ -34,13 +44,13 @@ const PokemonList = () => {
         justifyContent: 'center',
         gap: '8px'
       }}
-      dataLength={items.length}
-      next={fetchMoreData}
+      dataLength={pokemonList.length}
+      next={FetchPokemonData}
       hasMore={hasMore}
       loader={<LoadingLoader />}
     >
-      {items.map((i, index) => (
-        <PokemonCard key={index} />
+      {pokemonList.map((pokemon, index) => (
+        <PokemonCard key={index} pokemon={pokemon}  />
       ))}
     </InfiniteScroll>
   );

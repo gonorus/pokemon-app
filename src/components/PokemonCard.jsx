@@ -6,7 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 
 const PokemonCard = (props) => {
-  const { pokemon, pocket } = props;
+  const { pokemon } = props;
   const { name, dreamworld } = pokemon;
 
   const CardStyle = css({
@@ -56,7 +56,7 @@ const PokemonCard = (props) => {
       />
       <div className='info'>
         <p>{name}</p>
-        <p>owned: {pocket[[name]].length}</p>
+        <p>owned: 0</p>
       </div>
     </Link>
   );
@@ -67,11 +67,6 @@ PokemonCard.propTypes = {
     image: PropTypes.string,
     artwork: PropTypes.string,
     dreamworld: PropTypes.string
-  }),
-  pocket: PropTypes.shape({
-    [PropTypes.string]: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string
-    }))
   })
 };
 PokemonCard.defaultProps = {
@@ -80,16 +75,6 @@ PokemonCard.defaultProps = {
     image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
     artwork: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
     dreamworld: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg'
-  },
-  pocket: {
-    'pokemon-name': [
-      { name: 'pokemon-name1' },
-      { name: 'pokemon-name2' },
-    ],
-    'charmander': [
-      { name: 'charmander1' },
-      { name: 'charmander2' },
-    ]
   }
 }
 export default PokemonCard;
