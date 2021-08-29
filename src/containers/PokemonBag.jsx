@@ -1,6 +1,4 @@
 import React, { useContext, useMemo } from 'react';
-/* @jsx jsx */
-import { jsx, css } from '@emotion/react';
 import PokemonCardList from '../components/PokemonCardList';
 import { PokedexContext } from '../context/pokedex';
 
