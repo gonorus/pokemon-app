@@ -1,9 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import InfiniteScroll from "react-infinite-scroll-component";
-import PokemonCard from '../components/PokemonCard';
-
-import { COMPONENT_HEIGHT } from '../components/enums';
-import { LoadingLoader } from '../components/LoadingLoader';
+import PokemonCardList from '../components/PokemonCardList';
 import { LOAD_POKEMON_LIST } from '../graphql/Queries';
 
 const PokemonList = () => {
@@ -33,26 +29,11 @@ const PokemonList = () => {
   }, []);
 
   return (
-    <InfiniteScroll
-      height={`calc(100vh - ${COMPONENT_HEIGHT.Menubar})`}
-      style={{
-        height: `calc(100vh - ${COMPONENT_HEIGHT.Menubar})`,
-        padding: '16px 0',
-        boxSizing: 'border-box',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: '8px'
-      }}
-      dataLength={pokemonList.length}
-      next={FetchPokemonData}
+    <PokemonCardList
+      pokemonList={pokemonList}
       hasMore={hasMore}
-      loader={<LoadingLoader />}
-    >
-      {pokemonList.map((pokemon, index) => (
-        <PokemonCard key={index} pokemon={pokemon}  />
-      ))}
-    </InfiniteScroll>
+      hasMoreFetch={FetchPokemonData}
+    />
   );
 };
 export default PokemonList;
