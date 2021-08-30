@@ -12,14 +12,15 @@ import GraphqlClient from '../graphql/Configuration';
 const App = () => {
   const {
     pokedex,
-    AddPokemonIntoPokedex
+    AddPokemonIntoPokedex,
+    RemovePokemonFromPokedex
   } = UsePokedexHook();
 
   return (
     <ApolloProvider client={GraphqlClient}>
       <HashRouter>
         <MenuBar />
-        <PokedexContext.Provider value={{ pokedex, AddPokemonIntoPokedex }}>
+        <PokedexContext.Provider value={{ pokedex, AddPokemonIntoPokedex, RemovePokemonFromPokedex }}>
           <Switch>
             <Route exact path='/'>
               <PokemonList />

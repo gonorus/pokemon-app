@@ -21,7 +21,7 @@ export const UsePokedexHook = () => {
    */
   const _isPokemonCatched = (percentage = 0.5) => {
     return Math.random() < percentage;
-  }
+  };
 
   /**
    * @param {String} pokemonName 
@@ -45,29 +45,14 @@ export const UsePokedexHook = () => {
       else shouldValidateNickname = false;
     }
     return _nickName;
-  }
-
-  /**
-   * @param {String} pokemonName 
-   * @param {String} image 
-   */
-  const AddPokemonIntoPokedex = (pokemonName, image) => {
-    if (_isPokemonCatched()) {
-      const _nickName = _getPokemonNickName(pokemonName);
-      if (_nickName) {
-        PersistNewPokemon(pokemonName, image, _nickName);
-      }
-      else
-        alert(`${pokemonName} was run away`);
-    }
-  }
+  };
 
   /**
    * @param {String} pokemonName 
    * @param {String} image 
    * @param {String} nickName
    */
-  const PersistNewPokemon = (pokemonName, image, nickName) => {
+  const _persistNewPokemon = (pokemonName, image, nickName) => {
     if (pokedex) {
       const ownedPokemon = pokedex[pokemonName];
       if (ownedPokemon) {
@@ -104,10 +89,41 @@ export const UsePokedexHook = () => {
         }
       });
     }
+  };
+
+  /**
+   * @param {String} pokemonName 
+   * @param {String} image 
+   */
+  const AddPokemonIntoPokedex = (pokemonName, image) => {
+    if (_isPokemonCatched()) {
+      const _nickName = _getPokemonNickName(pokemonName);
+      if (_nickName) {
+        _persistNewPokemon(pokemonName, image, _nickName);
+      }
+      else
+        alert(`${pokemonName} was run away`);
+    }
+  };
+
+  const RemovePokemonFromPokedex = (pokemonName, nickName) => {
+    const ownedPokemon = pokedex[pokemonName];
+    ownedPokemon.owned = ownedPokemon.owned.filter((pokemon) => { return pokemon.name !== nickName });
+    if (ownedPokemon.owned.length === 0) {
+      delete pokedex[pokemonName];
+      setPokedex({ ...pokedex });
+    }
+    else {
+      setPokedex({
+        ...pokedex,
+        [[pokemonName]]: ownedPokemon
+      });
+    }
   }
 
   return ({
     pokedex,
     AddPokemonIntoPokedex,
+    RemovePokemonFromPokedex
   });
 };

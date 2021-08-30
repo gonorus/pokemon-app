@@ -17,7 +17,7 @@ const PokemonCardList = (props) => {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    gap: '8px',
+    gap: '18px',
 
     '@media (min-width: 600px)': {
       margin: '0 auto',
