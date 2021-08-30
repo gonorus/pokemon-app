@@ -6,7 +6,8 @@ import MenuBar from '../components/MenuBar';
 import PokemonList from './PokemonList';
 import PokemonDetail from './PokemonDetail';
 import PokemonBag from './PokemonBag';
-import { PokedexContext, UsePokedexHook } from '../context/pokedex';
+import { PokedexContext } from '../context/pokedex';
+import UsePokedex from '../hooks/UsePokedex';
 import GraphqlClient from '../graphql/Configuration';
 
 const App = () => {
@@ -14,7 +15,7 @@ const App = () => {
     pokedex,
     AddPokemonIntoPokedex,
     RemovePokemonFromPokedex
-  } = UsePokedexHook();
+  } = UsePokedex();
 
   return (
     <ApolloProvider client={GraphqlClient}>
